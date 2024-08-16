@@ -1,0 +1,20 @@
+* {
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+[class^='row'] {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+  flex: 1;
+}
+
+[class^='column'] {
+  display: flex;
+  flex: 1;
+}
