@@ -1,4 +1,4 @@
-import GameBoard from './GameBoard'
+import GameBoard from './GameBoard/GameBoard'
 
 const App = () => {
   return (
