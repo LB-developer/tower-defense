@@ -1,9 +1,5 @@
-export interface GameBoard {
+export interface Board {
   row: number[];
   column: number;
   grid: number[][];
-}
-
-export interface PathType {
-  tile: 'Open' | 'Closed' | 'Forced';
 }

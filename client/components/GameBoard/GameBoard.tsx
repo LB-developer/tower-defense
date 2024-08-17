@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import Path from './Path';
-import type { GameBoard } from '../../../models/Models';
+import type { Board } from '../../../models/Models';
 
-type Grid = GameBoard['grid'];
-type Row = GameBoard['row'];
-type Column = GameBoard['column'];
+export type Grid = Board['grid'];
+export type Row = Board['row'];
+export type Column = Board['column'];
 
 function generateBoardData(): Grid {
   const gameBoard: Grid = [];
@@ -23,30 +23,16 @@ function generateBoardData(): Grid {
   return gameBoard;
 }
 
-function renderBoardJSX(board: Grid): JSX.Element[] {
-  return board.map((row, rowIndex) => (
-    <div key={`board-row-${rowIndex}`} className={`row-${rowIndex}`}>
-      {row.map((col, colIndex) => (
-        <div
-          className={`column-${colIndex}`}
-          key={`board-row-${rowIndex}-column-${colIndex}`}
-        >
-          {col}
-        </div>
-      ))}
-    </div>
-  ));
-}
-
 export default function GameBoard() {
   //  param = difficulty: number
   const initialBoard = useMemo(() => generateBoardData(), []);
-  const [board, setBoard] = useState<Grid>(initialBoard);
-  const setPathToBoard = () => setBoard(Path(board));
+  // const [board, setBoard] = useState<Grid>(initialBoard);
 
   return (
     <>
-      <div className="game-board">{renderBoardJSX(board)}</div>
+      <div className="game-board">
+        <Path grid={initialBoard} />
+      </div>
     </>
   );
 }

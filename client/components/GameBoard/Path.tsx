@@ -1,31 +1,38 @@
+import { Grid, Row, Column } from './GameBoard';
 
+interface PathProps {
+  grid: number[][];
+}
 
+function generatePath({ grid }: PathProps): string[][] {
+  const pathedGrid = [...grid.map((row) => row.map((col) => col.toString()))];
+  pathedGrid[0][0] = 'Forced';
+  pathedGrid[5][5] = 'Forced';
 
-const array: number[][] = [
-  [0, 0, 0, 0, 0, 0],  // Row 1
-  [0, 0, 0, 0, 0, 0],  // Row 2
-  [0, 0, 0, 0, 0, 0],  // Row 3
-  [0, 0, 0, 0, 0, 0],  // Row 4
-  [0, 0, 0, 0, 0, 0],  // Row 5
-  [0, 0, 0, 0, 0, 0]   // Row 6
-];
+  return pathedGrid;
+}
 
+function renderBoardJSX(board: Grid): JSX.Element[] {
+  return board.map((row, rowIndex) => (
+    <div key={`board-row-${rowIndex}`} className={`row-${rowIndex}`}>
+      {row.map((col, colIndex) => (
+        <div
+          className={`column-${colIndex}`}
+          key={`board-row-${rowIndex}-column-${colIndex}`}
+        >
+          {col}
+        </div>
+      ))}
+    </div>
+  ));
+}
 
-
-
-
-function Path(board: number[][]): number[][] {
-  const pathStart: number = Math.floor(Math.random() * board[0].length)
-  const pathEnd: number = Math.floor(Math.random() * board[0].length)
-
-    const generateTileType = board.map((row) => {
-    row[0][0] = 'Forced'
-    row.map((column, colIndex, originalBoard) => {
-        
-    })
-  })
-  
-  
+function Path({ grid }: PathProps) {
+  return (
+    <>
+      <div>In Progress</div>
+    </>
+  );
 }
 
 export default Path;
