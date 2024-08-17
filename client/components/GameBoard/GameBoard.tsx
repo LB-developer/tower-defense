@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
 import Path from "./Path"
 import type { Board } from "./GameBoard.types"
-import TowerSelector from "../Towers/TowerSelector"
+import TowerSelector from "../Towers/TowerModal"
 
 export type Grid = Board["grid"]
 export type Row = Board["row"]
