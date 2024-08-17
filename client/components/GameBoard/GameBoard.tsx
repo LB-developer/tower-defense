@@ -26,19 +26,17 @@ function generateBoardData(): Grid {
 
 export default function GameBoard() {
   const initialBoard = useMemo(() => generateBoardData(), [])
+  const [towerModal, setTowerModal] = useState<Boolean>(false)
 
-  const handleTowerPlacement = (
-    clickInfo: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    console.log("CLIENT X", clickInfo.clientX)
-    console.log("CLIENT Y", clickInfo.clientY)
+  const handleTowerPlacement = (mouseX: number, mouseY: number): void => {
+    setTowerModal(!towerModal)
   }
 
   return (
     <>
       <div className="game-board">
         <Path grid={initialBoard} towerPlacement={handleTowerPlacement} />
-        <TowerSelector />
+        {towerModal && <TowerSelector wallSelected={towerModal} />}
       </div>
     </>
   )
