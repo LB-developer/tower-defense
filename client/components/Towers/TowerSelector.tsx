@@ -14,22 +14,22 @@ function TowerSelector({ wallSelected, mouseXY }: TowerSelectorProps) {
   function calculatePosition(
     x: number,
     y: number
-  ): { top: number; left: number } {
+  ): { topValue: number; leftValue: number } {
     let adjustedX = x
-    let adjustedY = x
+    let adjustedY = y
 
     if (x + towerSelectorWidth > windowWidth) {
-      towerSelectorStyle.left = windowWidth - towerSelectorWidth
+      adjustedX = windowWidth - towerSelectorWidth
     }
 
     if (y + towerSelectorHeight > windowHeight) {
-      towerSelectorStyle.top = windowHeight - towerSelectorHeight
+      adjustedY = windowHeight - towerSelectorHeight
     }
 
-    return { top: adjustedY, left: adjustedX }
+    return { topValue: adjustedY, leftValue: adjustedX }
   }
 
-  const { top, left } = calculatePosition(x, y)
+  const { topValue: top, leftValue: left } = calculatePosition(x, y)
   const towerSelectorStyle: React.CSSProperties = {
     position: "fixed",
     top: `${top}px`,
