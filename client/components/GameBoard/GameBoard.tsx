@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Path from './Path';
 import type { Board } from '../../../models/Models';
 
@@ -15,7 +15,7 @@ function generateBoardData(): Grid {
     let countColumn: Column = generateTiles;
 
     while (countColumn > 0) {
-      gridRow.push(countColumn);
+      gridRow.push(0);
       countColumn--;
     }
     gameBoard.push(gridRow);

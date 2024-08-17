@@ -1,6 +1,3 @@
-* {
-}
-
 .game-board {
   display: flex;
   flex-direction: column;
@@ -10,11 +7,15 @@
 [class^='row'] {
   display: flex;
   flex-direction: row;
-  background-color: lightcoral;
   flex: 1;
 }
+
+
 
 [class^='column'] {
   display: flex;
   flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
 }
