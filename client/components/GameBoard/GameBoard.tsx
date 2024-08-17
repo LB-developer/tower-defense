@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import Path from "./Path"
-import type { Board } from "../../../models/Models"
+import type { Board } from "./GameBoard.types"
 
 export type Grid = Board["grid"]
 export type Row = Board["row"]
