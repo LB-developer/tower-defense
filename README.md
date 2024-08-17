@@ -27,25 +27,13 @@ This project is a basic implementation of a Tower Defense game using React. The 
 
 1. **Clone the repository**:
 
-   bash
-
-   Copy code
-
-   `git clone <repository-url> cd tower-defense-game`
+   `git clone 'git@github.com:POR7ALa/tower-defense.git' cd tower-defense`
 
 2. **Install dependencies**:
-
-   bash
-
-   Copy code
 
    `npm install`
 
 3. **Run the development server**:
-
-   bash
-
-   Copy code
 
    `npm run dev`
 
