@@ -3,9 +3,7 @@ import { Grid } from "./GameBoard"
 
 interface PathProps {
   grid: number[][]
-  towerPlacement: (
-    clickInfo: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void
+  towerPlacement: (arg0:number, arg1:number) => void
 }
 function Path({ grid, towerPlacement }: PathProps) {
   const [towerSelectStatus, setTowerSelectStatus] = useState(false)
@@ -61,8 +59,9 @@ function Path({ grid, towerPlacement }: PathProps) {
     wallClicked: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     setTowerSelectStatus(!towerSelectStatus)
-
-    towerPlacement(wallClicked)
+    const mouseXcoordinate = wallClicked.clientX
+    const mouseYcoordinate = wallClicked.clientY
+    towerPlacement(mouseXcoordinate, mouseYcoordinate)
   }
 
   function renderBoardJSX(board: Grid): JSX.Element[] {
