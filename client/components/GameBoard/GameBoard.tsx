@@ -1,7 +1,6 @@
-import { useMemo, useState } from "react"
-import Path from "./Path"
+import { useMemo } from "react"
+import Path from "./GridManager"
 import type { Board } from "./GameBoard.types"
-import TowerSelector from "../Towers/TowerModal"
 
 export type Grid = Board["grid"]
 export type Row = Board["row"]
@@ -26,15 +25,11 @@ function generateBoardData(): Grid {
 
 export default function GameBoard() {
   const initialBoard = useMemo(() => generateBoardData(), [])
-  
-
-  
 
   return (
     <>
       <div className="game-board">
         <Path grid={initialBoard} />
-        
       </div>
     </>
   )
