@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import Path from "./GridManager"
+import GridManager from "./GridManager"
 import type { Board } from "./GameBoard.types"
 
 export type Grid = Board["grid"]
@@ -29,7 +29,7 @@ export default function GameBoard() {
   return (
     <>
       <div className="game-board">
-        <Path grid={initialBoard} />
+        <GridManager grid={initialBoard} />
       </div>
     </>
   )
