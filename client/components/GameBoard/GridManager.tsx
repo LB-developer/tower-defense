@@ -150,7 +150,7 @@ function GridManager({ grid, sendWave }: PathProps) {
           currentTowerPosition={activeWall}
         />
       )}
-      <EnemyLogic path={path} />
+      <EnemyLogic path={path} enemyWave={enemies} />
     </>
   )
 }
