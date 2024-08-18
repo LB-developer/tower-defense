@@ -12,9 +12,10 @@ interface PathProps {
 function GridManager({ grid }: PathProps) {
   const pathedGrid = useMemo(() => generatePath(grid), [grid])
   const [mouseCoordinates, setmouseCoordinates] = useState<number[]>([0, 0])
-  const [currentWallSelected, setcurrentWallSelected] = useState<string>()
+  const [currentWallSelected, setCurrentWallSelected] = useState<string>()
   const [showTowerModal, setShowTowerModal] = useState<boolean>(false)
-  const [activeTower, setActiveTower] = useState<PlacedTower>({} as PlacedTower)
+  const [activeWall, setActiveWall] = useState<HTMLElement | null>(null)
+  const [activeTower, setActiveTower] = useState<PlacedTower | boolean>(false)
 
   function generatePath(unpathedBoard: Grid) {
     const pathedGrid = [...unpathedBoard]
@@ -65,21 +66,30 @@ function GridManager({ grid }: PathProps) {
   const handleWallClick = (
     wallClicked: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
-    setcurrentWallSelected(wallClicked.currentTarget.id)
+    const currentWallId = wallClicked.currentTarget.id
+    setCurrentWallSelected(currentWallId)
+
     const mouseXcoordinate: number = wallClicked.clientX
     const mouseYcoordinate: number = wallClicked.clientY
     setmouseCoordinates([mouseXcoordinate, mouseYcoordinate])
+
     setShowTowerModal(!showTowerModal)
+    setActiveWall(document.getElementById(`${currentWallId}`))
   }
 
   const handlePlaceTower = (selectedTower: Tower): void => {
-    // const grabWall = document.getElementById(`${currentWallSelected}`)
-    if (currentWallSelected) {
+    if (currentWallSelected && !activeTower) {
       setActiveTower({
         ...selectedTower,
         position: currentWallSelected,
       })
+      activeWall?.classList.add(
+        `${selectedTower.title.split(" ").join("").replace(",", "")}`
+      )
     }
+    setActiveTower(false)
+    setCurrentWallSelected("")
+    setActiveWall(null)
   }
 
   function renderBoardJSX(board: Grid): JSX.Element[] {
