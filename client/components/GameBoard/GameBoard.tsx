@@ -1,7 +1,6 @@
-import { useMemo, useState } from "react"
-import Path from "./Path"
+import { useMemo } from "react"
+import Path from "./GridManager"
 import type { Board } from "./GameBoard.types"
-import TowerSelector from "../Towers/TowerModal"
 
 export type Grid = Board["grid"]
 export type Row = Board["row"]
@@ -26,21 +25,11 @@ function generateBoardData(): Grid {
 
 export default function GameBoard() {
   const initialBoard = useMemo(() => generateBoardData(), [])
-  const [towerModal, setTowerModal] = useState<Boolean>(false)
-  const [mouseCoordinates, setmouseCoordinates] = useState<number[]>([0, 0])
-
-  const handleTowerPlacement = (mouseX: number, mouseY: number): void => {
-    setmouseCoordinates([mouseX, mouseY])
-    setTowerModal(!towerModal)
-  }
 
   return (
     <>
       <div className="game-board">
-        <Path grid={initialBoard} towerPlacement={handleTowerPlacement} />
-        {towerModal && (
-          <TowerSelector wallSelected={towerModal} mouseXY={mouseCoordinates} />
-        )}
+        <Path grid={initialBoard} />
       </div>
     </>
   )

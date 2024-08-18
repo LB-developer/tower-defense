@@ -1,0 +1,16 @@
+{
+  "towers": [
+    {
+      "title": "Standard Tower",
+      "type": "Normal",
+      "damage": "5",
+      "range": 2
+    },
+    {
+      "title": "Splash Tower",
+      "type": "Water",
+      "damage": "4",
+      "range": 1
+    }
+  ]
+}
