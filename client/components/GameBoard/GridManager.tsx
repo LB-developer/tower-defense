@@ -1,22 +1,25 @@
 import { useMemo, useState } from "react"
 import { Grid } from "./GameBoard"
+
 import TowerSelector from "../Towers/TowerModal"
+import TowerModal from "../Towers/TowerModal"
 
 interface PathProps {
   grid: number[][]
 }
 function Path({ grid }: PathProps) {
-  const [towerSelectStatus, setTowerSelectStatus] = useState(false)
+  const [towerSelectStatus, setTowerSelectStatus] = useState<Boolean>(false)
+  const [showTowerModal, setShowTowerModal] = useState<Boolean>(false)
+  const [hasTower, setHasTower] = useState<Boolean>(false)
   const pathedGrid = useMemo(() => generatePath(grid), [grid])
-  const [towerModal, setTowerModal] = useState<Boolean>(false)
   const [mouseCoordinates, setmouseCoordinates] = useState<number[]>([0, 0])
 
-  function generatePath(unpathedBoard: number[][]) {
+  function generatePath(unpathedBoard: Grid) {
     const pathedGrid = [...unpathedBoard]
     let visited = new Set()
     let tileCount = 1
 
-    const makePath = (posY: number, posX: number) => {
+    const makePath = (posY: number, posX: number): Boolean => {
       if (posY === 5 && posX === 5) {
         pathedGrid[posY][posX] = tileCount
         tileCount++
@@ -59,16 +62,16 @@ function Path({ grid }: PathProps) {
 
   const handleWallClick = (
     wallClicked: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    setTowerSelectStatus(!towerSelectStatus)
-    const mouseXcoordinate = wallClicked.clientX
-    const mouseYcoordinate = wallClicked.clientY
-    handleTowerPlacement(mouseXcoordinate, mouseYcoordinate)
+  ): void => {
+    // setTowerSelectStatus(!towerSelectStatus)
+    const mouseXcoordinate: number = wallClicked.clientX
+    const mouseYcoordinate: number = wallClicked.clientY
+    setmouseCoordinates([mouseXcoordinate, mouseYcoordinate])
+    setShowTowerModal(!showTowerModal)
   }
 
-  const handleTowerPlacement = (mouseX: number, mouseY: number): void => {
-    setmouseCoordinates([mouseX, mouseY])
-    setTowerModal(!towerModal)
+  const handlePlaceTower = (): void => {
+    // console.log("restucture working")
   }
 
   function renderBoardJSX(board: Grid): JSX.Element[] {
@@ -77,7 +80,9 @@ function Path({ grid }: PathProps) {
         {row.map((col, colIndex) => (
           <div
             className={
-              col > 0 ? `column-${colIndex} path` : `column-${colIndex} wall`
+              col > 0
+                ? `column-${colIndex} path`
+                : `column-${colIndex} wall-${rowIndex}-${colIndex}`
             }
             onClick={col === 0 ? (e) => handleWallClick(e) : undefined}
             key={`board-row-${rowIndex}-column-${colIndex}`}
@@ -92,8 +97,12 @@ function Path({ grid }: PathProps) {
   return (
     <>
       {renderBoardJSX(pathedGrid)}
-      {towerModal && (
-        <TowerSelector wallSelected={towerModal} mouseXY={mouseCoordinates} />
+      {showTowerModal && (
+        <TowerModal
+          wallSelected={showTowerModal}
+          mouseXY={mouseCoordinates}
+          placeTower={handlePlaceTower()}
+        />
       )}
     </>
   )

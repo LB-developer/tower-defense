@@ -1,12 +1,14 @@
 import { useState } from "react"
-import { TowersList } from "./TowerInfo/Tower.types"
 import { towers } from "./TowerInfo/tower-info.json"
 
-function Towers() {
+interface TowerSelectorProps {
+  placeTower: void
+}
+
+function TowerSelector({ placeTower }: TowerSelectorProps) {
   const [currentTowerNumber, setCurrentTowerNumber] = useState<number>(0)
 
   const { title, type, damage, range } = towers[currentTowerNumber]
-
 
   function handleTowerChange(moveDirection: string): void {
     if (moveDirection === "next") {
@@ -19,7 +21,6 @@ function Towers() {
         : setCurrentTowerNumber(currentTowerNumber - 1)
     }
   }
-
 
   return (
     <>
@@ -46,4 +47,4 @@ function Towers() {
   )
 }
 
-export default Towers
+export default TowerSelector

@@ -1,11 +1,12 @@
-import Towers from "./TowerSelector"
+import TowerSelector from "./TowerSelector"
 
-interface TowerSelectorProps {
+interface TowerModalProps {
   wallSelected: Boolean
   mouseXY: number[]
+  placeTower: void
 }
 
-function TowerSelector({ wallSelected, mouseXY }: TowerSelectorProps) {
+function TowerModal({ wallSelected, mouseXY, placeTower }: TowerModalProps) {
   const [x, y] = mouseXY
 
   const windowHeight: number = window.innerHeight
@@ -45,11 +46,11 @@ function TowerSelector({ wallSelected, mouseXY }: TowerSelectorProps) {
     <>
       {wallSelected && (
         <div style={towerSelectorStyle}>
-          <Towers />
+          <TowerSelector placeTower={placeTower} />
         </div>
       )}
     </>
   )
 }
 
-export default TowerSelector
+export default TowerModal
