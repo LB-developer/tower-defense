@@ -1,29 +1,45 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Grid } from "./GameBoard"
-
+import wave1 from "../../Enemy Waves/wave1.json" // enemy
+import { Enemy } from "../../Enemy Waves/Enemies.types" // enemy
 import { PlacedTower, Tower } from "../Towers/TowerInfo/Tower.types"
 import TowerModal from "../Towers/TowerModal"
 import StandardTowerLogic from "../Towers/StandardTowerLogic"
+import EnemyLogic from "../../Enemy Waves/EnemyLogic"
+import { Coordinates } from "./GridManager.types"
 
 interface PathProps {
   grid: number[][]
+  sendWave: boolean
 }
-function GridManager({ grid }: PathProps) {
+
+const path: Set<Coordinates> = new Set()
+
+function GridManager({ grid, sendWave }: PathProps) {
   const pathedGrid = useMemo(() => generatePath(grid), [grid])
   const [mouseCoordinates, setmouseCoordinates] = useState<number[]>([0, 0])
-  const [currentWallSelected, setCurrentWallSelected] = useState<string>()
+  const [currentWallSelected, setCurrentWallSelected] = useState<string>("")
   const [showTowerModal, setShowTowerModal] = useState<boolean>(false)
   const [activeWall, setActiveWall] = useState<HTMLElement | null>(null)
   const [activeTower, setActiveTower] = useState<PlacedTower | boolean>(false)
+
+  const [enemies, setEnemies] = useState<Enemy[]>([] as Enemy[])
+
+  if (sendWave) {
+    useEffect(() => {
+      setEnemies(wave1.enemies)
+    }, [])
+  }
 
   function generatePath(unpathedBoard: Grid) {
     const pathedGrid = [...unpathedBoard]
     let visited = new Set()
     let tileCount = 1
 
-    const makePath = (posY: number, posX: number): Boolean => {
+    const makePath = (posY: number, posX: number): boolean => {
       if (posY === 7 && posX === 7) {
         pathedGrid[posY][posX] = tileCount
+        path.add({ x: posX, y: posY })
         tileCount++
         return true
       } // goal is found
@@ -51,6 +67,7 @@ function GridManager({ grid }: PathProps) {
       for (const [newY, newX] of directions) {
         if (makePath(newY, newX)) {
           pathedGrid[posY][posX] = tileCount
+          path.add({ x: posX, y: posY })
           tileCount++
           return true
         } // path to goal is found
@@ -59,6 +76,7 @@ function GridManager({ grid }: PathProps) {
       return false
     }
     makePath(0, 0)
+    console.log(path)
     return pathedGrid
   }
 
@@ -132,6 +150,7 @@ function GridManager({ grid }: PathProps) {
           currentTowerPosition={activeWall}
         />
       )}
+      <EnemyLogic path={path} />
     </>
   )
 }

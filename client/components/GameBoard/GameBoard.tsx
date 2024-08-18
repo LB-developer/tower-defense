@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import GridManager from "./GridManager"
 import type { Board } from "./GameBoard.types"
 
@@ -25,11 +25,15 @@ function generateBoardData(): Grid {
 
 export default function GameBoard() {
   const initialBoard = useMemo(() => generateBoardData(), [])
+  const [sendWave, setSendWave] = useState<boolean>(false)
 
   return (
     <>
       <div className="game-board">
-        <GridManager grid={initialBoard} />
+        <GridManager 
+        grid={initialBoard}
+        sendWave={sendWave}
+        />
       </div>
     </>
   )
