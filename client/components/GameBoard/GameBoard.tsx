@@ -26,21 +26,15 @@ function generateBoardData(): Grid {
 
 export default function GameBoard() {
   const initialBoard = useMemo(() => generateBoardData(), [])
-  const [towerModal, setTowerModal] = useState<Boolean>(false)
-  const [mouseCoordinates, setmouseCoordinates] = useState<number[]>([0, 0])
+  
 
-  const handleTowerPlacement = (mouseX: number, mouseY: number): void => {
-    setmouseCoordinates([mouseX, mouseY])
-    setTowerModal(!towerModal)
-  }
+  
 
   return (
     <>
       <div className="game-board">
-        <Path grid={initialBoard} towerPlacement={handleTowerPlacement} />
-        {towerModal && (
-          <TowerSelector wallSelected={towerModal} mouseXY={mouseCoordinates} />
-        )}
+        <Path grid={initialBoard} />
+        
       </div>
     </>
   )
