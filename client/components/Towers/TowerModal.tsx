@@ -12,8 +12,8 @@ function TowerModal({ wallSelected, mouseXY, placeTower }: TowerModalProps) {
 
   const windowHeight: number = window.innerHeight
   const windowWidth: number = window.innerWidth
-  const towerSelectorWidth: number = windowWidth / 4
-  const towerSelectorHeight: number = windowHeight / 3
+  const towerModalWidth: number = windowWidth / 4
+  const towerModalHeight: number = windowHeight / 3
 
   function calculatePosition(
     x: number,
@@ -22,12 +22,12 @@ function TowerModal({ wallSelected, mouseXY, placeTower }: TowerModalProps) {
     let adjustedX = x
     let adjustedY = y
 
-    if (x + towerSelectorWidth > windowWidth) {
-      adjustedX = windowWidth - towerSelectorWidth
+    if (x + towerModalWidth > windowWidth) {
+      adjustedX = windowWidth - towerModalWidth
     }
 
-    if (y + towerSelectorHeight > windowHeight) {
-      adjustedY = windowHeight - towerSelectorHeight
+    if (y + towerModalHeight > windowHeight) {
+      adjustedY = windowHeight - towerModalHeight
     }
 
     return { topValue: adjustedY, leftValue: adjustedX }
@@ -38,8 +38,8 @@ function TowerModal({ wallSelected, mouseXY, placeTower }: TowerModalProps) {
     position: "fixed",
     top: `${top}px`,
     left: `${left}px`,
-    minWidth: `${towerSelectorWidth}px`,
-    height: `${towerSelectorHeight}px`,
+    minWidth: `${towerModalWidth}px`,
+    height: `${towerModalHeight}px`,
     backgroundColor: "red",
   }
 

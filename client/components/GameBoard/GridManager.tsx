@@ -1,10 +1,9 @@
 import { useMemo, useState } from "react"
 import { Grid } from "./GameBoard"
 
-import towers from "../Towers/TowerInfo/tower-info.json"
-import TowerSelector from "../Towers/TowerModal"
 import { PlacedTower, Tower } from "../Towers/TowerInfo/Tower.types"
 import TowerModal from "../Towers/TowerModal"
+import StandardTowerLogic from "../Towers/StandardTowerLogic"
 
 interface PathProps {
   grid: number[][]
@@ -98,9 +97,15 @@ function GridManager({ grid }: PathProps) {
         {row.map((col, colIndex) => (
           <div
             className={
-              col > 0 ? `column-${colIndex} path` : `column-${colIndex} `
+              col > 0
+                ? `row-${rowIndex} column-${colIndex} path`
+                : `row-${rowIndex} column-${colIndex} wall`
             }
-            id={col === 0 ? `wall-${rowIndex}-${colIndex}` : undefined}
+            id={
+              col === 0
+                ? `wall-${rowIndex}-${colIndex}`
+                : `path-${rowIndex}-${colIndex}`
+            }
             onClick={col === 0 ? (e) => handleWallClick(e) : undefined}
             key={`board-row-${rowIndex}-column-${colIndex}`}
           >
@@ -119,6 +124,12 @@ function GridManager({ grid }: PathProps) {
           wallSelected={showTowerModal}
           mouseXY={mouseCoordinates}
           placeTower={handlePlaceTower}
+        />
+      )}
+      {activeTower && activeWall && (
+        <StandardTowerLogic
+          currentTower={activeTower}
+          currentTowerPosition={activeWall}
         />
       )}
     </>
