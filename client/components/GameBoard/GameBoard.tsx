@@ -8,7 +8,7 @@ export type Column = Board["column"]
 
 function generateBoardData(): Grid {
   const gameBoard: Grid = []
-  const generateTiles: number = 5
+  const generateTiles: number = 7
 
   for (let i = 0; i <= generateTiles; i++) {
     const gridRow: Row = []

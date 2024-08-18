@@ -22,7 +22,7 @@ function GridManager({ grid }: PathProps) {
     let tileCount = 1
 
     const makePath = (posY: number, posX: number): Boolean => {
-      if (posY === 5 && posX === 5) {
+      if (posY === 7 && posX === 7) {
         pathedGrid[posY][posX] = tileCount
         tileCount++
         return true
