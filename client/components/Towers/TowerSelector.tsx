@@ -1,14 +1,16 @@
 import { useState } from "react"
 import { towers } from "./TowerInfo/tower-info.json"
+import { Tower } from "./TowerInfo/Tower.types";
 
 interface TowerSelectorProps {
-  placeTower: void
+  placeTower: (selectedTower: Tower) => void;
 }
 
 function TowerSelector({ placeTower }: TowerSelectorProps) {
   const [currentTowerNumber, setCurrentTowerNumber] = useState<number>(0)
 
-  const { title, type, damage, range } = towers[currentTowerNumber]
+
+  const { title, type, damage, range, upgradeable, upgradeLevel } = towers[currentTowerNumber]
 
   function handleTowerChange(moveDirection: string): void {
     if (moveDirection === "next") {
@@ -26,7 +28,16 @@ function TowerSelector({ placeTower }: TowerSelectorProps) {
     <>
       <div className="select-standard-tower">
         <div className="standard-tower-picture">
-          <button type="button">Place Tower</button>
+          <button onClick={() => placeTower({
+            title: title,
+            type: type,
+            damage: damage,
+            range: range,
+            upgradeable: upgradeable,
+            upgradeLevel: upgradeLevel
+          })} type="button">
+            Place Tower
+          </button>
         </div>
         <div className="standard-tower-info">
           <p>{title}</p>

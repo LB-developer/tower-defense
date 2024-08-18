@@ -1,9 +1,10 @@
+import { Tower } from "./TowerInfo/Tower.types"
 import TowerSelector from "./TowerSelector"
 
 interface TowerModalProps {
-  wallSelected: Boolean
+  wallSelected: boolean
   mouseXY: number[]
-  placeTower: void
+  placeTower: (selectedTower: Tower) => void
 }
 
 function TowerModal({ wallSelected, mouseXY, placeTower }: TowerModalProps) {

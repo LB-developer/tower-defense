@@ -7,4 +7,10 @@ export interface Tower {
   type: string
   damage: string
   range: number
+  upgradeable: boolean
+  upgradeLevel: number
+}
+
+export interface PlacedTower extends Tower {
+  position: string
 }

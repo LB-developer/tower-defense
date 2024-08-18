@@ -4,13 +4,17 @@
       "title": "Standard Tower",
       "type": "Normal",
       "damage": "5",
-      "range": 2
+      "range": 2,
+      "upgradeable": true,
+      "upgradeLevel": 1
     },
     {
       "title": "Splash Tower",
       "type": "Water",
       "damage": "4",
-      "range": 1
+      "range": 1,
+      "upgradeable": true,
+      "upgradeLevel": 1
     }
   ]
 }
