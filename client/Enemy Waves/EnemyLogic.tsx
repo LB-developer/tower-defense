@@ -8,7 +8,10 @@ interface EnemyLogicProps {
 }
 
 function EnemyLogic({ path }: EnemyLogicProps) {
-  const [startingPosition] = path
+  const pathArray = Array.from(path)
+  const [startingPosition] = pathArray
+
+  const [currentPathIndex, setCurrentPathIndex] = useState(0)
   const [enemyPosition, setEnemyPosition] =
     useState<Coordinates>(startingPosition)
 
