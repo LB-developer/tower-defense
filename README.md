@@ -37,16 +37,6 @@ This project is a basic implementation of a Tower Defense game using React. The 
 
    `npm run dev`
 
-## Project Structure
-
-- **`client/components/GameBoard/`**:
-  - **`GameBoard.tsx`**: Manages the game board's data structure and passes it to the `Path` component for rendering
-  - **`Path.tsx`**: Renders the game board and the path on the grid.`
-- **`client/index.tsx`**: The entry point for the React application.
-- **`tsconfig.json`**: TypeScript configuration file.
-- **`vite.config.js`**: Configuration file for Vite, used for development and production builds.
-- **`Dockerfile`**: Configuration for containerizing the application (if Docker is essential to your process).
-
 ## Future Development
 
 This ongoing project is a Tower Defense game built with a focus on demonstrating comprehensive full-stack development skills. The current phase involves implementing features such as tower placement, enemy AI, scoring systems, and more. The goal is to create a fully functional Tower Defense game that showcases a robust understanding of React for the frontend, algorithmic problem-solving for game mechanics, and backend integration for data management and real-time updates.
